@@ -14,9 +14,9 @@
     </header>
     <div class="row">
         <div class="col-3 flex-column">
-            <div class="d-flex justify-content-center">Search for a City:</div>
+            <div class="d-flex justify-content-center fw-bold fs-3">Search for a City:</div>
             <div class="d-flex justify-content-center">
-                <input class="w-75 d-flex text-center" type="text" placeholder="Enter City">
+                <input class="w-75 d-flex text-center" type="text" id="cityInput" placeholder="Enter City">
             </div>
             <div class="d-flex justify-content-center border-bottom border-secondary">
                 <button class="btn btn-primary m-1">SEARCH</button>
@@ -30,9 +30,11 @@
 
                
         </div>
-        <div class="col-9 row-cols-1">WEATHER INFO
-            <div>CURRENT WEATHER</div>
-            <div class="row">
+        <div class="col-9 row-cols-1">
+            <div class="m-2 border border-2 border-primary rounded">
+                <div class= "fw-bold fs-2" id="cityName"></div>
+            </div>
+            <div class="row"> FIVE DAY FORECAST:
                 <div class="col-2">DAY 1</div>
                 <div class="col-2">DAY 2</div>
                 <div class="col-2">DAY 3</div>
