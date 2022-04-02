@@ -10,7 +10,7 @@ var city = "MILWAUKEE"
 var lat = ""
 var lon = ""
 var prevSearch = []
-var geocodeURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=dac42aacf1187949ffc701f7f8725fad"
+var geocodeURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=dac42aacf1187949ffc701f7f8725fad"
 var weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=dac42aacf1187949ffc701f7f8725fad&units=imperial"
 var date = []
 for (i=0; i<6; i++) {
