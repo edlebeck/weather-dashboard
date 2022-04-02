@@ -60,7 +60,7 @@ function weather () {
         return response.json()
     })
     .then(function(data){
-        currentWeather.setAttribute("src", ("http://openweathermap.org/img/wn/" + data.current.weather[0].icon +"@2x.png"))
+        currentWeather.setAttribute("src", ("https://openweathermap.org/img/wn/" + data.current.weather[0].icon +"@2x.png"))
         currentTemp.innerText = "Temp:  " + data.current.temp + "\u00B0F"
         currentWind.innerText = "Wind:  " + data.current.wind_speed + " MPH"
         currentHumidity.innerText = "Humidity:  " + data.current.humidity + "%"
@@ -80,7 +80,7 @@ function weather () {
             var days = document.getElementById("date"+i)
             days.innerText = date[i]
             var icon = document.getElementById("weatherIcon"+i)
-            icon.setAttribute("src", ("http://openweathermap.org/img/wn/" + data.daily[i-1].weather[0].icon +"@2x.png"))
+            icon.setAttribute("src", ("https://openweathermap.org/img/wn/" + data.daily[i-1].weather[0].icon +"@2x.png"))
             var dayTemp = document.getElementById("temp" + i)
             dayTemp.innerText = "Temp:  " + data.daily[i-1].temp.max + "\u00B0F"
             var wind = document.getElementById("wind"+i)
