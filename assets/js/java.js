@@ -23,7 +23,7 @@ for (i=0; i<6; i++) {
 function cityInfo (cityInput) {
 
     cityName.innerText = cityInput + "  (" + date[0] + ")";
-    var geocodeURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&appid=dac42aacf1187949ffc701f7f8725fad"
+    var geocodeURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&appid=dac42aacf1187949ffc701f7f8725fad"
     fetch(geocodeURL)
     .then(function(response) {
         if (response.ok) {
