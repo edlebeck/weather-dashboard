@@ -13,15 +13,15 @@ var prevSearch = []
 var geocodeURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=dac42aacf1187949ffc701f7f8725fad"
 var weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=dac42aacf1187949ffc701f7f8725fad&units=imperial"
 var date = []
+// fill date array with current day and the next 5 days
 for (i=0; i<6; i++) {
     var newDay = new Date();
     newDay.setDate(newDay.getDate() + i)
     newDay = newDay.toLocaleDateString();
     date[i] = newDay
 }
-
+// function to get api data
 function cityInfo (cityInput) {
-
     cityName.innerText = cityInput + "  (" + date[0] + ")";
     var geocodeURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityInput + "&appid=dac42aacf1187949ffc701f7f8725fad"
     fetch(geocodeURL)
@@ -33,12 +33,14 @@ function cityInfo (cityInput) {
         }
     })
     .then(function(data) {
+        // statement to catch errors
         if (data.length > 0){
             lat = data[0].lat
             lon = data[0].lon
             weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=dac42aacf1187949ffc701f7f8725fad&units=imperial"
             weather()
         } else {
+            // statement to remove error data from search history
             prevSearch.pop()
             localStorage.setItem("prevSearch", JSON.stringify(prevSearch));
             var parentDiv = document.getElementById("parent"+prevSearch.length)
@@ -46,26 +48,29 @@ function cityInfo (cityInput) {
             var searchDiv = document.getElementById("search")
             parentDiv.removeChild(removeBtn)
             searchDiv.removeChild(parentDiv)
+            // clear input field
             placeholder.value = ''
             placeholder.setAttribute("placeholder", "Enter City")
             alert("Something went wrong\nCheck city spelling")
         }
     })
 }
-
+// function to get weather data
 function weather () {
     fetch(weatherURL)
     .then(function(response) {
-        // console.log(response.json())
         return response.json()
     })
     .then(function(data){
+        // fill elements with called data
         currentWeather.setAttribute("src", ("https://openweathermap.org/img/wn/" + data.current.weather[0].icon +"@2x.png"))
         currentTemp.innerText = "Temp:  " + data.current.temp + "\u00B0F"
         currentWind.innerText = "Wind:  " + data.current.wind_speed + " MPH"
         currentHumidity.innerText = "Humidity:  " + data.current.humidity + "%"
+        // clear input field
         placeholder.value = ''
         placeholder.setAttribute("placeholder", "Enter City")
+        // color uvi for severity
         if (data.current.uvi <= 2) {
             currentUV.setAttribute("class","btn btn-success")
             currentUV.innerText = data.current.uvi
@@ -76,6 +81,7 @@ function weather () {
             currentUV.setAttribute("class","btn btn-warning")
             currentUV.innerText = data.current.uvi
         }
+        // fill 5 day forecast with called data
         for (i=1; i<6; i++){
             var days = document.getElementById("date"+i)
             days.innerText = date[i]
@@ -90,12 +96,13 @@ function weather () {
         }
     })
 }
-
+// function to get city input
 function getInput () {
-
     city = document.getElementById("cityInput").value;
     city = city.toUpperCase()
+    // prevent input from filling if nothing entered
     if (city != "") {
+        // remove duplicate entries from search history
         if (prevSearch.indexOf(city) === -1) {
             prevSearch.push(city)
             var previous = document.createElement("div")
@@ -114,12 +121,14 @@ function getInput () {
         } 
     }
 }
-
+// fill search bar with data from local storage
 function previousSearch() {
     prevSearch = JSON.parse(localStorage.getItem("prevSearch"))
+    // start array if empty
     if (prevSearch === null) {
         prevSearch = ["MILWAUKEE"]
     }
+    // create buttons for search functionality
     prevSearch.forEach(function (result){
         var previous = document.createElement("div")
         previous.classList.add("d-flex", "justify-content-center")
